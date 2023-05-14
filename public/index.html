@@ -19,9 +19,9 @@
     </nav>
     <div id="ntv-form" class="form-container" style="display: none;">
         <h2>NTV Form</h2>
-        <form id="ntv-form" action="/generate-ntv" method="post">
+        <form id="ntv-form" action="/generate-ntv" method="post" autocomplete="off">
             <label for="todaysdate">Today's Date:</label>
-            <input type="date" id="todaysdate" name="todaysdate" required>
+            <input type="text" id="todaysdate-ntv" name="todaysdate" required>
             <br><br>
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" required>
@@ -40,14 +40,11 @@
                 <input type="text" id="lastname2" name="lastname2">
                 <br><br>
             </div>
-            <label for="building">Building:</label>
-            <input type="text" id="building" name="building" required>
-            <br><br>
             <label for="unit">Unit:</label>
             <input type="text" id="unit" name="unit" required>
             <br><br>
             <label for="leaseend">Lease End Date:</label>
-            <input type="date" id="leaseend" name="leaseend" required>
+            <input type="text" id="leaseend" name="leaseend" required>
             <br><br>
             <label for="proratedrent">Prorated Rent:</label>
             <input type="number" id="proratedrent" name="proratedrent" step="0.01" required>
@@ -57,9 +54,9 @@
     </div>
     <div id="tyfr-form" class="form-container" style="display: none;">
         <h2>TYFR Form</h2>
-        <form id="tyfr-form" action="/generate-tyfr" method="post">
+        <form id="tyfr-form" action="/generate-tyfr" method="post" autocomplete="off">
             <label for="todaysdate">Today's Date:</label>
-            <input type="date" id="todaysdate-tyfr" name="todaysdate" required>
+            <input type="text" id="todaysdate-tyfr" name="todaysdate" required>
             <br><br>
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" required>
@@ -77,7 +74,7 @@
             <input type="text" id="unit" name="unit" required>
             <br><br>
             <label for="leaseend">Lease End Date:</label>
-            <input type="date" id="leaseend-tyfr" name="leaseend" required>
+            <input type="text" id="leaseend-tyfr" name="leaseend" required>
             <br><br>
             <label for="dayrange1">Day range 1:</label>
             <input type="text" id="dayrange1" placeholder="1-15" name="dayrange1">
@@ -108,9 +105,9 @@
     </div>
     <div id="tyfr-mtm-form" class="form-container" style="display: none;">
         <h2>TYFR MTM Form</h2>
-        <form id="tyfr-mtm-form" action="/generate-mtm" method="post">
+        <form id="tyfr-mtm-form" action="/generate-mtm" method="post" autocomplete="off">
             <label for="todaysdate">Today's Date:</label>
-            <input type="date" id="todaysdate-mtm" name="todaysdate" required>
+            <input type="text" id="todaysdate-mtm" name="todaysdate" required>
             <br><br>
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" required>
@@ -136,7 +133,7 @@
             <input type="text" id="unit" name="unit" required>
             <br><br>
             <label for="leaseend">Lease End Date:</label>
-            <input type="date" id="leaseend-mtm" name="leaseend" required>
+            <input type="text" id="leaseend-mtm" name="leaseend" required>
             <br><br>
             <label for="proratedrent">Prorated Rent:</label>
             <input type="number" id="proratedrent" name="proratedrent" step="0.01" required>
@@ -145,16 +142,6 @@
         </form>
     </div>
     <script>
-        // Set the default value for "todaysdate" and "leaseend" to the current date
-        const todaysdateInputs = ['todaysdate', 'todaysdate-tyfr', 'todaysdate-mtm'];
-        const leaseendInputs = ['leaseend', 'leaseend-tyfr', 'leaseend-mtm'];
-        todaysdateInputs.forEach(id => {
-            document.getElementById(id).valueAsDate = new Date();
-        });
-        leaseendInputs.forEach(id => {
-            document.getElementById(id).valueAsDate = new Date();
-        });
-
         // Show or hide the second person fields based on the checkbox state
         const checkboxes = ['addSecondPerson', 'addSecondPerson-tyfr', 'addSecondPerson-mtm'];
         const fields = ['secondPersonFields', 'secondPersonFields-tyfr', 'secondPersonFields-mtm'];
@@ -173,6 +160,22 @@
                 event.preventDefault();
             }
         });
+
+        window.onload = function () {
+            let todaysdate = new Date();
+            let dd = String(todaysdate.getDate()).padStart(2, '0');
+            let mm = String(todaysdate.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = todaysdate.getFullYear();
+            todaysdate = mm + '/' + dd + '/' + yyyy;
+
+            // Query all the date input fields
+            const dateInputs = document.querySelectorAll('#todaysdate-ntv, #todaysdate-tyfr, #todaysdate-mtm');
+
+            // Loop over each input field and set the value to the current date
+            dateInputs.forEach(input => {
+                input.value = todaysdate;
+            });
+        }
     </script>
 
     <script src="main.js"></script>

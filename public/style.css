@@ -37,3 +37,8 @@ nav {
 .nav-tabs a.active {
     background-color: #007bff;
 }
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}

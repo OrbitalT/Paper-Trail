@@ -45,7 +45,6 @@ router.post('/generate-tyfr', (req, res) => {
     // console.log(data);
 
     // Format the dates
-    data.todaysdate = formatDate(data.todaysdate);
     const leaseEndFormatted = formatDate(data.leaseend, 'MMMM DD, YYYY');
     data.leaseend = leaseEndFormatted.formattedDate;
     data.leaseendmonth = leaseEndFormatted.month;
@@ -60,7 +59,7 @@ router.post('/generate-tyfr', (req, res) => {
     const hasSecondPerson = data.firstname2 && data.lastname2;
 
     // Load the DOCX file as a binary
-    const content = fs.readFileSync(path.resolve(__dirname, '../tyfr.docx'), 'binary');
+    const content = fs.readFileSync(path.resolve(__dirname, '../templates/tyfr.docx'), 'binary');
 
     // Create a PizZip instance with the file content
     const zip = new PizZip(content);

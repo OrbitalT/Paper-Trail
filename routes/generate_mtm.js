@@ -48,7 +48,7 @@ router.post('/generate-mtm', (req, res) => {
     const hasSecondPerson = data.firstname2 && data.lastname2;
 
     // Load the DOCX file as a binary
-    const content = fs.readFileSync(path.resolve(__dirname, '../mtm.docx'), 'binary');
+    const content = fs.readFileSync(path.resolve(__dirname, '../templates/mtm.docx'), 'binary');
 
     // Create a PizZip instance with the file content
     const zip = new PizZip(content);

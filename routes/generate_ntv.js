@@ -32,11 +32,14 @@ function formatNumber(number) {
     });
 }
 
+function getBuilding(unit) {
+    return Math.floor(parseInt(unit) / 100) * 100;
+}
+
 router.post('/generate-ntv', (req, res) => {
     const data = req.body;
 
     // Format the dates
-    data.todaysdate = formatDate(data.todaysdate);
     const leaseEndFormatted = formatDate(data.leaseend, 'MMMM DD, YYYY');
     data.leaseend = leaseEndFormatted.formattedDate;
     data.leaseendmonth = leaseEndFormatted.month;
@@ -48,13 +51,16 @@ router.post('/generate-ntv', (req, res) => {
     const hasSecondPerson = data.firstname2 && data.lastname2;
 
     // Load the DOCX file as a binary
-    const content = fs.readFileSync(path.resolve(__dirname, '../ntv.docx'), 'binary');
+    const content = fs.readFileSync(path.resolve(__dirname, '../templates/ntv.docx'), 'binary');
 
     // Create a PizZip instance with the file content
     const zip = new PizZip(content);
 
     // Create a docxtemplater instance with the PizZip instance
     const doc = new Docxtemplater().loadZip(zip);
+
+    // Get the building number from the unit number
+    data.building = getBuilding(data.unit);
 
     // Set the template variables
     doc.setData({
