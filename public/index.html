@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper-Trail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Paper-Trail</h1>
+    <nav>
+        <ul class="nav-tabs">
+            <li><a href="#ntv-form" class="tab-link active">NTV</a></li>
+            <li><a href="#tyfr-form" class="tab-link">TYFR</a></li>
+            <li><a href="#tyfr-mtm-form" class="tab-link">TYFR MTM</a></li>
+        </ul>
+    </nav>
+    <div id="ntv-form" class="form-container" style="display: none;">
+        <h2>NTV Form</h2>
+        <form id="ntv-form" action="/generate-ntv" method="post">
+            <label for="todaysdate">Today's Date:</label>
+            <input type="date" id="todaysdate" name="todaysdate" required>
+            <br><br>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+            <br><br>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+            <br><br>
+            <label for="addSecondPerson">Add a second person:</label>
+            <input type="checkbox" id="addSecondPerson" name="addSecondPerson">
+            <br><br>
+            <div id="secondPersonFields" style="display: none;">
+                <label for="firstname2">First Name (Person 2):</label>
+                <input type="text" id="firstname2" name="firstname2">
+                <br><br>
+                <label for="lastname2">Last Name (Person 2):</label>
+                <input type="text" id="lastname2" name="lastname2">
+                <br><br>
+            </div>
+            <label for="building">Building:</label>
+            <input type="text" id="building" name="building" required>
+            <br><br>
+            <label for="unit">Unit:</label>
+            <input type="text" id="unit" name="unit" required>
+            <br><br>
+            <label for="leaseend">Lease End Date:</label>
+            <input type="date" id="leaseend" name="leaseend" required>
+            <br><br>
+            <label for="proratedrent">Prorated Rent:</label>
+            <input type="number" id="proratedrent" name="proratedrent" step="0.01" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="tyfr-form" class="form-container" style="display: none;">
+        <h2>TYFR Form</h2>
+        <form id="tyfr-form" action="/generate-tyfr" method="post">
+            <label for="todaysdate">Today's Date:</label>
+            <input type="date" id="todaysdate-tyfr" name="todaysdate" required>
+            <br><br>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+            <br><br>
+            <div id="secondPersonFields-tyfr" style="display: none;">
+                <label for="firstname2">First Name (Person 2):</label>
+                <input type="text" id="firstname2" name="firstname2">
+                <label for="lastname2">Last Name (Person 2):</label>
+                <input type="text" id="lastname2" name="lastname2">
+                <br><br>
+            </div>
+            <label for="unit">Unit:</label>
+            <input type="text" id="unit" name="unit" required>
+            <br><br>
+            <label for="leaseend">Lease End Date:</label>
+            <input type="date" id="leaseend-tyfr" name="leaseend" required>
+            <br><br>
+            <label for="dayrange1">Day range 1:</label>
+            <input type="text" id="dayrange1" placeholder="1-15" name="dayrange1">
+            <label for="rentpart1">Prorated Rent 1:</label>
+            <input type="number" id="rentpart1" name="rentpart1" placeholder="600.00" step="0.01" required>
+            <br><br>
+            <label for="dayrange2">Day range 2:</label>
+            <input type="text" id="dayrange2" placeholder="16-31" name="dayrange2">
+            <label for="rentpart2">Prorated Rent 2:</label>
+            <input type="number" id="rentpart2" name="rentpart2" placeholder="800.00" step="0.01" required>
+            <br><br>
+            <label for="nextmonth">Next Month:</label>
+            <input type="text" id="nextmonth" placeholder="June" name="nextmonth" required>
+            <label for="newrent">New Rent:</label>
+            <input type="number" id="newrent" name="newrent" placeholder="1600.00" step="0.01" required>
+            <br><br>
+            <label for="addSecondPerson">Add a second person:</label>
+            <input type="checkbox" id="addSecondPerson-tyfr" name="addSecondPerson">
+            <br><br>
+            <label for="addGarage">Add a Garage:</label>
+            <input type="checkbox" id="addGarage" name="addGarage">
+            <br><br>
+            <label for="addPet">Add a Pet:</label>
+            <input type="checkbox" id="addPet" name="addPet">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="tyfr-mtm-form" class="form-container" style="display: none;">
+        <h2>TYFR MTM Form</h2>
+        <form id="tyfr-mtm-form" action="/generate-mtm" method="post">
+            <label for="todaysdate">Today's Date:</label>
+            <input type="date" id="todaysdate-mtm" name="todaysdate" required>
+            <br><br>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+            <br><br>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+            <br><br>
+            <label for="addSecondPerson">Add a second person:</label>
+            <input type="checkbox" id="addSecondPerson-mtm" name="addSecondPerson">
+            <br><br>
+            <div id="secondPersonFields-mtm" style="display: none;">
+                <label for="firstname2">First Name (Person 2):</label>
+                <input type="text" id="firstname2" name="firstname2">
+                <br><br>
+                <label for="lastname2">Last Name (Person 2):</label>
+                <input type="text" id="lastname2" name="lastname2">
+                <br><br>
+            </div>
+            <label for="building">Building:</label>
+            <input type="text" id="building" name="building" required>
+            <br><br>
+            <label for="unit">Unit:</label>
+            <input type="text" id="unit" name="unit" required>
+            <br><br>
+            <label for="leaseend">Lease End Date:</label>
+            <input type="date" id="leaseend-mtm" name="leaseend" required>
+            <br><br>
+            <label for="proratedrent">Prorated Rent:</label>
+            <input type="number" id="proratedrent" name="proratedrent" step="0.01" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        // Set the default value for "todaysdate" and "leaseend" to the current date
+        const todaysdateInputs = ['todaysdate', 'todaysdate-tyfr', 'todaysdate-mtm'];
+        const leaseendInputs = ['leaseend', 'leaseend-tyfr', 'leaseend-mtm'];
+        todaysdateInputs.forEach(id => {
+            document.getElementById(id).valueAsDate = new Date();
+        });
+        leaseendInputs.forEach(id => {
+            document.getElementById(id).valueAsDate = new Date();
+        });
+
+        // Show or hide the second person fields based on the checkbox state
+        const checkboxes = ['addSecondPerson', 'addSecondPerson-tyfr', 'addSecondPerson-mtm'];
+        const fields = ['secondPersonFields', 'secondPersonFields-tyfr', 'secondPersonFields-mtm'];
+
+        checkboxes.forEach((id, index) => {
+            const addSecondPersonCheckbox = document.getElementById(id);
+            const secondPersonFields = document.getElementById(fields[index]);
+
+            addSecondPersonCheckbox.addEventListener('change', () => {
+                secondPersonFields.style.display = addSecondPersonCheckbox.checked ? 'block' : 'none';
+            });
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
