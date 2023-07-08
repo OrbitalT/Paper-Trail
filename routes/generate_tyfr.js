@@ -42,12 +42,26 @@ function getBuilding(unit) {
 router.post('/generate-tyfr', (req, res) => {
     const data = req.body;
 
-    // console.log(data);
-
     // Format the dates
     const leaseEndFormatted = formatDate(data.leaseend, 'MMMM DD, YYYY');
     data.leaseend = leaseEndFormatted.formattedDate;
     data.leaseendmonth = leaseEndFormatted.month;
+
+    // Check if leaseend data is provided
+    const leaseEndDate = new Date(data.leaseend);
+    leaseEndDate.setMonth(leaseEndDate.getMonth() + 1); // Go to next month
+
+    // This will give the next month name (e.g., January, February, etc.)
+    data.nextmonth = leaseEndDate.toLocaleString('default', {
+        month: 'long'
+    });
+
+    // Calculate the days in old lease and days in new lease
+    // const oldLeaseEnd = new Date(data.leaseend);
+    // const totalDaysInMonth = new Date(oldLeaseEnd.getFullYear(), oldLeaseEnd.getMonth() + 1, 0).getDate();
+
+    // data.dayrange1 = oldLeaseEnd.getDate();
+    // data.dayrange2 = totalDaysInMonth - data.dayrange1;
 
     // Sum the rentpart1 and rentpart2 values and store the result in data.proratedrent
     data.proraterent = parseFloat(data.rentpart1) + parseFloat(data.rentpart2);
@@ -92,8 +106,6 @@ router.post('/generate-tyfr', (req, res) => {
         nextmonth: data.nextmonth,
         newrent: data.newrent
     });
-
-    console.log(doc);
 
     // Render the document
     try {

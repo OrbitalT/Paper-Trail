@@ -1,7 +1,6 @@
 const tabLinks = document.querySelectorAll('.tab-link');
 const formContainers = document.querySelectorAll('.form-container');
 
-// Add event listeners to each tab
 tabLinks.forEach((tab) => {
     tab.addEventListener('click', (event) => {
         event.preventDefault();
